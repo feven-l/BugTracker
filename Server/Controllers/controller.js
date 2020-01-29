@@ -196,7 +196,7 @@ function createRouter(db) {
         });
         router.get('/tickets/:id', function(req,res,next){
             db.query(
-                `SELECT CONCAT(firstName,' ',lastName) AS fullName, ticketName,ticketType,ticketDescription,ticketPriority,ticketDueDate,ticketStatus,tickets.createdAt,tickets.updatedAt,projects.projectName
+                `SELECT users.id AS UserId,assignedUserId,ticketCreatorId,CONCAT(firstName,' ',lastName) AS fullName, ticketName,ticketType,ticketDescription,ticketPriority,ticketDueDate,ticketStatus,tickets.createdAt,tickets.updatedAt,projects.projectName
                 from bugtrackerdb.users inner join bugtrackerdb.tickets on tickets.assignedUserId=users.id or tickets.ticketCreatorid inner join bugtrackerdb.projects on tickets.Projects_id=projects.id where tickets.id=${req.params.id};`,
                 (error, results) => {
                     if (error) {
