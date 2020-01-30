@@ -1,5 +1,7 @@
 const path = require('path');
 const express = require('express');
+const bcrypt = require('bcrypt');
+
 
 // module.exports = app => {
     
@@ -26,15 +28,26 @@ function createRouter(db) {
     const router = express.Router();
   
     router.post('/users', (req, res, next) => {
-      db.query(
-        `INSERT INTO bugtrackerdb.users (firstName, lastName, email, password) VALUES ('${req.body.firstName}','${req.body.lastName}','${req.body.email}','${req.body.password}')`,
-      //   [req.body.owner, req.body.name, req.body.description],
+    // var hashed_password = '';
+    // bcrypt.hash(req.body.password, 10)
+    // .then(hashed_password => {
+    //     console.log(hashed_password);
+    //     req.body.hashed_password = hashed_password;
+    // })
+    // .catch(error => {
+    //     console.log('could not hash password', error);
+    // })
+    db.query(
+        `INSERT INTO bugtrackerdb.users (firstName, lastName, email, password) VALUES ('${req.body.firstName}','${req.body.lastName}','${req.body.email}', '${req.body.password}')`,
+        //   [req.body.owner, req.body.name, req.body.description],
         (error) => {
-          if (error) {
-            console.error(error);
-            res.status(500).json({status: 'error'});
-          } else {
-            res.status(200).json({status: 'ok'});
+            if (error) {
+                console.error(error);
+                res.status(500).json({status: 'error'});
+            } else {
+                console.log("after db is created", req.body)
+                res.status(200).json({status: 'ok'});
+                // return res.json()
           }
         }
       );
@@ -54,7 +67,26 @@ function createRouter(db) {
             }
             );
         });
-        router.get('/users', function (req, res, next) {
+        router.post('/userLogin', function (req, res, next) {
+            console.log(req.body);
+            db.query(
+                `SELECT email, password, id FROM bugtrackerdb.users WHERE email = '${req.body.email}'`,
+                (error, results) => {
+                    if (error) {
+                        console.log(error);
+                        res.status(500).json({status: 'error'});
+                    } else {
+                        console.log(results[0].password);
+                        if(results[0].password == req.body.password){
+                            return res.status(200).json(results[0]);
+                        }else{
+                            return res.status(200).json("error");
+                        }
+                    }
+                }
+                );
+            });
+        router.get('/users/', function (req, res, next) {
             db.query(
                 `SELECT * FROM bugtrackerdb.users`,
                 (error, results) => {
@@ -67,7 +99,7 @@ function createRouter(db) {
                 }
                 );
             });
-        
+    
         router.get('/projects', function (req, res, next) {
             db.query(
                 `SELECT * FROM bugtrackerdb.projects;`,
@@ -82,6 +114,7 @@ function createRouter(db) {
                 }
                 );
             });
+        
         router.get('/projects/:id', function (req, res, next) {
             db.query(
                 `SELECT users.id AS UserID,users.email, CONCAT(firstName,' ',lastName) AS fullName,projects.projectName,projects.projectDescription,projects.projectPriority,projects.projectDueDate,developers.roleType,developers.isCreator 

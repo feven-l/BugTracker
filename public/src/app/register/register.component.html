@@ -1,0 +1,19 @@
+<div style="width: 450px;" class="d-inline-block mr-5 ml-5" >
+    <h2 class="display-4">Sign Up today</h2>
+    <form class="form-group container-fluid p-5 border float-left justify-right" action="NewUser">
+        <label for="firstName">First Name</label>
+        <input class="form-control" name="newUser.firstName" [(ngModel)]="newUser.firstName">
+
+        <label for="lastName">Last Name</label>
+        <input class="form-control"  name="newUser.lastName" [(ngModel)]="newUser.lastName">
+
+        <label for="email">Email</label>
+        <input class="form-control"  name="newUser.email" [(ngModel)]="newUser.email">
+
+        <label for="newUser.password">Password</label>
+        <input class="form-control"  name="newUser.password" [(ngModel)]="newUser.password">
+
+        <input class="btn btn-success btn-block mt-3" type="submit" (click)="createUser(newUser)" value="Register">
+    </form>    
+
+</div>
