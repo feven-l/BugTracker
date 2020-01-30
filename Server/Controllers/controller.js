@@ -162,6 +162,58 @@ function createRouter(db) {
             }
             })
         })
+        router.delete('/tickets/delete/:id',(req,res,next) =>{
+            db.query(
+            `DELETE FROM bugtrackerdb.comments WHERE (Tickets_id = ${req.params.id});`,
+             
+            (error) => {
+                if (error) {
+                console.error(error);
+                res.status(500).json({status: 'error'});
+                } else {
+                    
+                res.status(200).json({status: 'ok'});
+                db.query(`DELETE FROM bugtrackerdb.tickets WHERE tickets.id =${req.params.id};`,
+                (error) => {
+                    if (error) { 
+                    console.error(error);
+                    res.status(500).json({status: 'error'});
+                    } else {
+                        
+                    res.status(200).json({status: 'ok'});
+                    }
+                })
+            }
+            })
+        })
+        router.delete('/comments/delete/:id',(req,res,next) =>{
+            db.query(
+            `DELETE FROM bugtrackerdb.comments WHERE (comments.id = ${req.params.id});`,
+             
+            (error) => {
+                if (error) {
+                console.error(error);
+                res.status(500).json({status: 'error'});
+                } 
+                else {
+                res.status(200).json({status: 'ok'});
+                }
+            })
+        })
+        router.delete('/comments/delete/:projId/:userId',(req,res,next) =>{
+            db.query(
+            `DELETE FROM bugtrackerdb.developers WHERE (Projects_id = ${req.params.projId}) and (Users_id=${req.params.userId});`,
+             
+            (error) => {
+                if (error) {
+                console.error(error);
+                res.status(500).json({status: 'error'});
+                } 
+                else {
+                res.status(200).json({status: 'ok'});
+                }
+            })
+        })
                 
         router.put('/tickets/:id',(req,res,next) =>{
             db.query(`UPDATE bugtrackerdb.tickets SET ticketName='${req.body.ticketName}', ticketType='${req.body.ticketType}',ticketDescription='${req.body.ticketDescription}',ticketPriority='${req.body.ticketPriority}',ticketDueDate='${req.body.ticketDueDate}',
