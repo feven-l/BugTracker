@@ -121,7 +121,6 @@ function createRouter(db) {
                                     }
                                 }
                             )
-
                         }
                     }
                 );
@@ -218,8 +217,6 @@ function createRouter(db) {
         router.put('/tickets/:id',(req,res,next) =>{
             db.query(`UPDATE bugtrackerdb.tickets SET ticketName='${req.body.ticketName}', ticketType='${req.body.ticketType}',ticketDescription='${req.body.ticketDescription}',ticketPriority='${req.body.ticketPriority}',ticketDueDate='${req.body.ticketDueDate}',
             ticketStatus='${req.body.ticketStatus}',assignedUserId='${req.body.assignedUserId}' where tickets.id=${req.params.id}`,
-            // UPDATE `bugtrackerdb`.`tickets` SET `ticketName` = 'jason afdsa', `ticketType` = 'murderdsaf', `ticketDescription` = 'kill a politicasdfal leader', `ticketPriority` = 'id say itasdfdsas pretty important', `ticketDueDate` = '1971-01-01', 
-            // `ticketStatus` = 'fsdafsd', `assignedUserId` = '2' WHERE (`id` = '1') ;
             (error) => {
                 if (error) {
                 console.error(error);
