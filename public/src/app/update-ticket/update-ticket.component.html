@@ -1,0 +1,60 @@
+<div class="new-ticket-form  mx-auto shadow-lg rounded" style="width: 60vw;">
+    <form class="p-5 border new-ticket-form ">
+        <label for="">Create Ticket</label>
+        <hr>
+        <div class="main-sect col w-50 d-inline-block align-top mr-5">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Title</label>
+                <input type="text" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp">
+            </div>
+            <div class="form-group pb-3">
+                <label for="">Description</label>
+                <input type="text" class="form-control form-control-sm" id="">
+            </div>
+            <hr>
+            <div class="form-group">
+                <label for="">Due Date</label>
+                <input type="date" class="form-control form-control-sm" id="">
+            </div>
+            <div class="form-group">
+                <label for="ProjectName">Assignee</label>
+                <select class="custom-select custom-select-sm" name="" id="">
+                    <option selected>Select Developer</option>
+                    <option value="projects">Dev 1</option>
+                    <option value="projects">Dev 2</option>
+                </select>
+            </div>
+        </div>
+        <div class="row d-inline-block">
+            <div class="form-group col">
+                <label for="ProjectName">Ticket Type</label>
+                <select class="custom-select custom-select-sm" name="" id="">
+                    <option selected>Select type</option>
+                    <option value="projects">Error</option>
+                    <option value="projects">Bug</option>
+                </select>
+            </div>
+            <div class="form-group col">
+                <label for="ProjectName">Project</label>
+                <select class="custom-select custom-select-sm" name="" id="">
+                    <option selected>Select a project</option>
+                    <option value="projects">Project 1</option>
+                    <option value="projects">Project 2</option>
+                    <option value="projects">Project 3</option>
+                    <option value="projects">Project 4</option>
+                </select>
+            </div>
+            <div class="form-group col">
+                <label for="ProjectName">Priority</label>
+                <select class="custom-select custom-select-sm" name="" id="">
+                    <option selected>Select Priority</option>
+                    <option value="projects">High</option>
+                    <option value="projects">Medium</option>
+                    <option value="projects">Low</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary m-3">Submit</button>
+            <button type="submit" class="btn btn-outline-primary">Cancel</button>
+        </div>
+    </form>
+</div>

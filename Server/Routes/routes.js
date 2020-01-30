@@ -1,10 +1,10 @@
 const controller = require('../Controllers/controller');
 const path = require('path');
-const express = require('express');
 
 module.exports = app => {
     
-    // app.get('/projects', controller.allProjects);
+    // app.post('/users', controller.);
+    // router.post('/users', contr
     // app.get('/projects/:id', controller.oneProject);
     // app.get('/tickets/:id', controller.oneTicket);
     // app.post('/projects', controller.createProject);
