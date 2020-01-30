@@ -117,7 +117,7 @@ function createRouter(db) {
         
         router.get('/projects/:id', function (req, res, next) {
             db.query(
-                `SELECT users.email, CONCAT(firstName,' ',lastName) AS fullName,projects.projectName,projects.projectDescription,projects.projectPriority,projects.projectDueDate,developers.roleType,developers.isCreator 
+                `SELECT users.id AS UserID,users.email, CONCAT(firstName,' ',lastName) AS fullName,projects.projectName,projects.projectDescription,projects.projectPriority,projects.projectDueDate,developers.roleType,developers.isCreator 
                 FROM bugtrackerdb.users INNER JOIN bugtrackerdb.developers on users.id=developers.Users_id INNER JOIN bugtrackerdb.projects ON developers.Projects_id=projects.id WHERE projects.id=${req.params.id}`,
                 (error, results) => {
                     if (error) {
@@ -159,6 +159,109 @@ function createRouter(db) {
                     }
                 );
             });
+        router.put('/projects/:id',(req,res,next) =>{
+            db.query(`UPDATE bugtrackerdb.projects set projectName='${req.body.projectName}', projectDescription='${req.body.projectDescription}',projectDueDate='${req.body.projectDueDate}',projectPriority='${req.body.projectPriority}' where id=${req.params.id}`,
+            // UPDATE `bugtrackerdb`.`projects` SET `projectName` = 'dsaf', `projectDescription` = 'dsafdsaf', `projectPriority` = 'fdsadsfdsa' WHERE (`id` = '1') and (`creatorId` = '1');
+            (error) => {
+                if (error) {
+                console.error(error);
+                res.status(500).json({status: 'error'});
+                } else {
+                res.status(200).json({status: 'ok'});
+                }
+            })
+        })
+        router.delete('/projects/delete/:id',(req,res,next) =>{
+            db.query(//`DELETE FROM bugtrackerdb.projects WHERE projects.id=${req.params.id} and creatorId=${req.body.creatorId}`,
+            `DELETE FROM bugtrackerdb.developers WHERE (Projects_id = ${req.params.id});`,
+             
+            (error) => {
+                if (error) {
+                console.error(error);
+                res.status(500).json({status: 'error'});
+                } else {
+                    
+                res.status(200).json({status: 'ok'});
+                db.query(`DELETE FROM bugtrackerdb.projects WHERE projects.id =${req.params.id};`,
+                (error) => {
+                    if (error) { 
+                    console.error(error);
+                    res.status(500).json({status: 'error'});
+                    } else {
+                        
+                    res.status(200).json({status: 'ok'});
+                    }
+                })
+            }
+            })
+        })
+        router.delete('/tickets/delete/:id',(req,res,next) =>{
+            db.query(
+            `DELETE FROM bugtrackerdb.comments WHERE (Tickets_id = ${req.params.id});`,
+             
+            (error) => {
+                if (error) {
+                console.error(error);
+                res.status(500).json({status: 'error'});
+                } else {
+                    
+                res.status(200).json({status: 'ok'});
+                db.query(`DELETE FROM bugtrackerdb.tickets WHERE tickets.id =${req.params.id};`,
+                (error) => {
+                    if (error) { 
+                    console.error(error);
+                    res.status(500).json({status: 'error'});
+                    } else {
+                        
+                    res.status(200).json({status: 'ok'});
+                    }
+                })
+            }
+            })
+        })
+        router.delete('/comments/delete/:id',(req,res,next) =>{
+            db.query(
+            `DELETE FROM bugtrackerdb.comments WHERE (comments.id = ${req.params.id});`,
+             
+            (error) => {
+                if (error) {
+                console.error(error);
+                res.status(500).json({status: 'error'});
+                } 
+                else {
+                res.status(200).json({status: 'ok'});
+                }
+            })
+        })
+        router.delete('/comments/delete/:projId/:userId',(req,res,next) =>{
+            db.query(
+            `DELETE FROM bugtrackerdb.developers WHERE (Projects_id = ${req.params.projId}) and (Users_id=${req.params.userId});`,
+             
+            (error) => {
+                if (error) {
+                console.error(error);
+                res.status(500).json({status: 'error'});
+                } 
+                else {
+                res.status(200).json({status: 'ok'});
+                }
+            })
+        })
+                
+        router.put('/tickets/:id',(req,res,next) =>{
+            db.query(`UPDATE bugtrackerdb.tickets SET ticketName='${req.body.ticketName}', ticketType='${req.body.ticketType}',ticketDescription='${req.body.ticketDescription}',ticketPriority='${req.body.ticketPriority}',ticketDueDate='${req.body.ticketDueDate}',
+            ticketStatus='${req.body.ticketStatus}',assignedUserId='${req.body.assignedUserId}' where tickets.id=${req.params.id}`,
+            // UPDATE `bugtrackerdb`.`tickets` SET `ticketName` = 'jason afdsa', `ticketType` = 'murderdsaf', `ticketDescription` = 'kill a politicasdfal leader', `ticketPriority` = 'id say itasdfdsas pretty important', `ticketDueDate` = '1971-01-01', 
+            // `ticketStatus` = 'fsdafsd', `assignedUserId` = '2' WHERE (`id` = '1') ;
+            (error) => {
+                if (error) {
+                console.error(error);
+                res.status(500).json({status: 'error'});
+                } else {
+                res.status(200).json({status: 'ok'});
+                }
+            })
+        })
         router.get('/developers', function (req, res, next) {
             db.query(
                 `SELECT * FROM bugtrackerdb.developers`,
@@ -254,39 +357,41 @@ function createRouter(db) {
                 }
             )
         });
+        router.post('/comments', function (req, res, next) {
+            db.query(
+                `INSERT INTO bugtrackerdb.comments (comment,Tickets_id,commentCreatorId) VALUES ('${req.body.comment}',${req.body.ticketId},
+                ${req.body.comment}',${req.body.ticketId},${req.body.commentCreatorId})`,
+                (error) => {
+                    if (error) {
+                    console.error(error);
+                    res.status(500).json({status: 'error'});
+                    } else {
+                    res.status(200).json({status: 'ok'});
+                    }
+                }
+            )
+        });
+        router.get('/comments/:ticketId', function (req, res, next) {
+            db.query(
+                `SELECT * From bugtrackerdb.comments where Tickets_id=${req.params.ticketId}`,
+                (error) => {
+                    if (error) {
+                    console.error(error);
+                    res.status(500).json({status: 'error'});
+                    } else {
+                    res.status(200).json({status: 'ok'});
+                    }
+                }
+            )
+        });
     
-
-
-
-
-
-    //         router.put('/event/:id', function (req, res, next) {
-    //             db.query(
-    //     'UPDATE events SET name=?, description=?, date=? WHERE id=? AND owner=?',
-    //     [req.body.name, req.body.description, new Date(req.body.date), req.params.id, owner],
-    //     (error) => {
-    //       if (error) {
-    //         res.status(500).json({status: 'error'});
-    //       } else {
-    //         res.status(200).json({status: 'ok'});
-    //       }
-    //     }
-    //   );
-    // });
-    // router.delete('/event/:id', function (req, res, next) {
-    //   db.query(
-    //     'DELETE FROM events WHERE id=? AND owner=?',
-    //     [req.params.id, owner],
-    //     (error) => {
-    //       if (error) {
-    //         res.status(500).json({status: 'error'});
-    //       } else {
-    //         res.status(200).json({status: 'ok'});
-    //       }
-    //     }
-    //   );
-    // });
     return router;
   }
   
-  module.exports = createRouter;
+  module.exports = createRouter,app => {
+    
+        app.all("*", (req,res,next) => {
+            res.sendFile(path.resolve("./public/dist/public/index.html"));
+        });
+    }
+    ;
