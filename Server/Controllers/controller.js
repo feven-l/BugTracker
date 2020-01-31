@@ -43,11 +43,11 @@ function createRouter(db) {
         (error,results) => {
             if (error) {
                 console.error(error);
-                res.status(500).json({status: 'error'});
+                res.status(500).json({message: 'error'});
             } else {
                 console.log("after db is created", req.body)
                 console.log(results)
-                res.status(200).json({status: 'ok'});
+                return res.status(200).json({data: results});
                 // return res.json()
           }
         }
