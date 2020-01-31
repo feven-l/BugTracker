@@ -47,7 +47,7 @@ function createRouter(db) {
             } else {
                 console.log("after db is created", req.body)
                 console.log(results)
-                res.status(200).json({status: 'ok'});
+                return res.status(200).json({status: 'ok',results:results});
                 // return res.json()
           }
         }
