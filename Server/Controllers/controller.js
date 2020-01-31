@@ -40,12 +40,13 @@ function createRouter(db) {
     db.query(
         `INSERT INTO bugtrackerdb.users (firstName, lastName, email, password) VALUES ('${req.body.firstName}','${req.body.lastName}','${req.body.email}', '${req.body.password}')`,
         //   [req.body.owner, req.body.name, req.body.description],
-        (error) => {
+        (error,results) => {
             if (error) {
                 console.error(error);
                 res.status(500).json({status: 'error'});
             } else {
                 console.log("after db is created", req.body)
+                console.log(results)
                 res.status(200).json({status: 'ok'});
                 // return res.json()
           }
@@ -86,7 +87,7 @@ function createRouter(db) {
                 }
                 );
             });
-        router.get('/users/', function (req, res, next) {
+        router.get('/users', function (req, res, next) {
             db.query(
                 `SELECT * FROM bugtrackerdb.users`,
                 (error, results) => {
@@ -154,7 +155,6 @@ function createRouter(db) {
                             //         }
                             //     }
                             // )
-
                         }
                     }
                 );
@@ -251,8 +251,6 @@ function createRouter(db) {
         router.put('/tickets/:id',(req,res,next) =>{
             db.query(`UPDATE bugtrackerdb.tickets SET ticketName='${req.body.ticketName}', ticketType='${req.body.ticketType}',ticketDescription='${req.body.ticketDescription}',ticketPriority='${req.body.ticketPriority}',ticketDueDate='${req.body.ticketDueDate}',
             ticketStatus='${req.body.ticketStatus}',assignedUserId='${req.body.assignedUserId}' where tickets.id=${req.params.id}`,
-            // UPDATE `bugtrackerdb`.`tickets` SET `ticketName` = 'jason afdsa', `ticketType` = 'murderdsaf', `ticketDescription` = 'kill a politicasdfal leader', `ticketPriority` = 'id say itasdfdsas pretty important', `ticketDueDate` = '1971-01-01', 
-            // `ticketStatus` = 'fsdafsd', `assignedUserId` = '2' WHERE (`id` = '1') ;
             (error) => {
                 if (error) {
                 console.error(error);

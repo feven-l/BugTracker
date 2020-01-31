@@ -7,8 +7,8 @@
   <title>Document</title>
 </head>
 <body>
-  <app-generic-page *ngIf="!loggedout"></app-generic-page>
-  <div class="container-fluid" *ngIf="loggedout">
+  <app-generic-page (aTaskEventEmitter)="dataFromChild($event)" *ngIf="loggedout"></app-generic-page>
+  <div class="container-fluid" *ngIf="!loggedout">
     <nav class="navbar navbar-bg fixed-top navbar-expand-lg navbar-light bg-light shadow p-3 mb-5 rounded">
       <div class="collapse navbar-collapse">
         <a class="navbar-brand" href="#">Bug Tracker</a>
@@ -115,7 +115,6 @@
         
         <!-- MAIN -->
         <div class="col mt-5 py-5 body-bg">
-          <router-outlet></router-outlet>
           
           
         </div>
@@ -124,8 +123,9 @@
       </div>
       
   </div>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <router-outlet></router-outlet>
+<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> -->
 </body>
 </html>

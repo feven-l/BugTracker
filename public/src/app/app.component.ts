@@ -13,17 +13,21 @@ export class AppComponent implements OnInit{
   title = 'public';
   loggedout : boolean;
 
-
   constructor(
     private _session : LoginComponent,
     private _httpService: HttpService,
     private _route: ActivatedRoute,
     private _router: Router
   ) { }
+  dataFromChild(blah){
+    console.log(blah);
+    this.loggedout=blah;
+  }
   ngOnInit(){
     this.loggedout = true;
+    // console.log(this.inSession);
   }
-  // getSession(session){
-  //   this.inSession = 
-  // }
+  loggedin(){
+    this.loggedout=false
+  }
 }
