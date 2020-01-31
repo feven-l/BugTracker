@@ -27,11 +27,11 @@ export class RegisterComponent implements OnInit {
   createUser(newUser){
     let obs = this._httpService.createUser(newUser);
     obs.subscribe((data:any) => {
-      console.log(data.status);
-      if(data.status == "ok"){
+      console.log(data.data);
+      if(data.data.insertId){
         console.log("created new user!");
-        this._router.navigate(['/dashboard']);
         this.triggerEvent();        
+        this._router.navigate(['']);
       }
       else{
         console.log("error");

@@ -4,58 +4,66 @@
         <hr>
         <div class="main-sect col w-50 d-inline-block align-top mr-5">
             <div class="form-group">
-                <label for="exampleInputEmail1">Title</label>
-                <input type="text" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <label for="ticketName">Title</label>
+                <input type="text" name="newTicket.ticketName" [(ngModel)]="newTicket.ticketName" class="form-control form-control-sm">
             </div>
             <div class="form-group pb-3">
                 <label for="">Description</label>
-                <input type="text" class="form-control form-control-sm" id="">
+                <input type="text" name="newTicket.ticketDescription" [(ngModel)]="newTicket.ticketDescription" class="form-control form-control-sm" >
             </div>
             <hr>
             <div class="form-group">
                 <label for="">Due Date</label>
-                <input type="date" class="form-control form-control-sm" id="">
+                <input type="date" name="newTicket.ticketDueDate" [(ngModel)]="newTicket.ticketDueDate" class="form-control form-control-sm" >
             </div>
             <div class="form-group">
                 <label for="ProjectName">Assignee</label>
-                <select class="custom-select custom-select-sm" name="" id="">
+                <select class="custom-select custom-select-sm" name="newTicket.assignedUserId" [(ngModel)]="newTicket.assignedUserId" >
                     <option selected>Select Developer</option>
-                    <option value="projects">Dev 1</option>
-                    <option value="projects">Dev 2</option>
+                    <option *ngFor="let user of allUsers" [value]="user.id">{{user.firstName}} {{user.lastName}}</option>
+                    
                 </select>
             </div>
         </div>
         <div class="row d-inline-block">
             <div class="form-group col">
                 <label for="ProjectName">Ticket Type</label>
-                <select class="custom-select custom-select-sm" name="" id="">
+                <select class="custom-select custom-select-sm" name="newTicket.ticketType" [(ngModel)]="newTicket.ticketType" >
                     <option selected>Select type</option>
-                    <option value="projects">Error</option>
-                    <option value="projects">Bug</option>
+                    <option value="Error">Error</option>
+                    <option value="Bug">Bug</option>
                 </select>
             </div>
             <div class="form-group col">
                 <label for="ProjectName">Project</label>
-                <select class="custom-select custom-select-sm" name="" id="">
+                <select class="custom-select custom-select-sm" name="newTicket.Projects_id" [(ngModel)]="newTicket.Projects_id">
                     <option selected>Select a project</option>
-                    <option value="projects">Project 1</option>
-                    <option value="projects">Project 2</option>
-                    <option value="projects">Project 3</option>
-                    <option value="projects">Project 4</option>
+                    <option *ngFor="let project of allProjects" [value]="project.id">{{project.projectName}}
+                    </option>
                 </select>
             </div>
             <div class="form-group col">
-                <label for="ProjectName">Priority</label>
-                <select class="custom-select custom-select-sm" name="" id="">
+                <label for="ProjectName">Ticket Priority</label>
+                <select class="custom-select custom-select-sm" name="newTicket.ticketPriority" [(ngModel)]="newTicket.ticketPriority">
                     <option selected>Select Priority</option>
-                    <option value="projects">High</option>
-                    <option value="projects">Medium</option>
-                    <option value="projects">Low</option>
+                    <option value="High">High</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Low">Low</option>
+                </select>
+            </div>
+            <div class="form-group col">
+                <label for="ProjectName">Ticket Status</label>
+                <select class="custom-select custom-select-sm" name="newTicket.ticketStatus" [(ngModel)]="newTicket.ticketStatus">
+                    <option selected>Select Status</option>
+                    <option value="Pending">Pending</option>
+                    <option value="In review">In review</option>
+                    <option value="Solved">Solved</option>
                 </select>
             </div>
         </div>
+
         <div class="row">
-            <button type="submit" class="m-3 col-sm-5 btn btn-dark mx-auto">Submit</button>
+            <button type="submit" class="m-3 col-sm-5 btn btn-dark mx-auto" (click)="createTicket(newTicket)">Submit</button>
             <button type="submit" class="m-3 col-sm-5 btn btn-dark mx-auto">Cancel</button>
         </div>
     </form>

@@ -23,7 +23,7 @@
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
               <a class="dropdown-item" [routerLink]="['/tracker/ticket/new']">Create Ticket</a>
               <a class="dropdown-item" [routerLink]="['/tracker/project/new']">Create Project</a>
-              <a class="dropdown-item" href="#">Manage users</a>
+              <a class="dropdown-item" [routerLink]="['/tracker/users']">Manage users</a>
             </div>
           </div>
         </ul>
@@ -49,7 +49,7 @@
             Menu
           </a>
           <div class="dropdown-menu" aria-labelledby="smallerscreenmenu">
-            <a class="dropdown-item" href="#">Dashboard</a>
+            <a class="dropdown-item" [routerLink]="['']">Dashboard</a>
             <a class="dropdown-item" href="#">Profile</a>
             <a class="dropdown-item" href="#">Tasks</a>
             <a class="dropdown-item" href="#">Etc ...</a>
@@ -73,7 +73,7 @@
             </li>
             <!-- /END Separator -->
             <!-- Menu with submenu -->
-            <a href="#" class=" list-opacity list-group-item border-bottom list-group-item border-bottom-action">
+            <a [routerLink]="['']" class=" list-opacity list-group-item border-bottom list-group-item border-bottom-action">
               <div class="d-flex w-100 justify-content-start align-items-center">
                 <span class="fa fa-address-card fa-fw mr-3"></span>
                 <span class="menu-collapsed text-black">Dashboard</span>
@@ -94,7 +94,7 @@
             <!-- Separator without title -->
             <!-- <li class="list-group-item border-bottom sidebar-separator menu-collapsed"></li> -->
             <!-- /END Separator -->
-            <a href="#" class="list-opacity list-group-item border-bottom list-group-item border-bottom-action">
+            <a [routerLink]="['/tracker/users']" class="list-opacity list-group-item border-bottom list-group-item border-bottom-action">
               <div class="d-flex w-100 justify-content-start align-items-center">
                 <span class="fa fa-address-book fa-fw mr-3"></span>
                 <span class="menu-collapsed text-black">Manage Users</span>
@@ -108,7 +108,7 @@
             </a>
             <!-- Logo -->
             <li class="list-group-item border-bottom logo-separator d-flex justify-content-center" style="height: 100%">
-              <img src="https://v4-alpha.getbootstrap.com/assets/brand/bootstrap-solid.svg" width="30" height="30">
+              <img src="https://cdn.onlinewebfonts.com/svg/img_234977.png" width="30" height="30">
             </li>
           </ul>
         </div>

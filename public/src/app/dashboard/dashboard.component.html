@@ -1,13 +1,19 @@
 <h1 class="display-4" style="margin-left: 20vw;">Dashboard</h1>
 <hr>
 <div class="show-card mx-auto" style="width:fit-content">
-    <div class="show-act my-upcoming-tasks border d-inline-block m-3 p-4">
-    <h4>My Tasks</h4>
+    <div class="show-act my-upcoming-tasks border d-inline-block m-3 p-4 align-top">
+    <h4>My Tasks <img style="width:50px;" class="ml-4 mb-2" src="https://www.freepnglogos.com/uploads/pin-png/pin-pins-png-clipart-best-4.png" alt=""></h4>
     <hr>
+    <ul class="list-group list-group-flush" *ngFor="let ticket of allTickets">
+        <a class="list-group-item list-group-item-action list-group-item-warning" [routerLink]="['/tracker/ticket', ticket.id]">Ticket: {{ticket.ticketName}}  |   Priority: {{ticket.ticketPriority}}</a>
+    </ul>
     </div>
     <div class="show-act all-activity border d-inline-block m-3 p-4">
-    <h4>Upcoming</h4>
+    <h4>Upcoming <img style="width:50px;" class="ml-4 mb-2" src="https://www.freepnglogos.com/uploads/pin-png/pin-pins-png-clipart-best-4.png" alt=""></h4>
     <hr>
+    <ul class="list-group list-group-flush" *ngFor="let ticket of allTickets">
+        <a class="list-group-item list-group-item-action list-group-item-warning" [routerLink]="['/tracker/ticket', ticket.id]">Ticket: {{ticket.ticketName}}  |   Priority: {{ticket.ticketPriority}}</a>
+    </ul>
     </div>
     <br>
 </div>

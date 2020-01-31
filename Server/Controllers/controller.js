@@ -43,11 +43,11 @@ function createRouter(db) {
         (error,results) => {
             if (error) {
                 console.error(error);
-                res.status(500).json({status: 'error'});
+                res.status(500).json({message: 'error'});
             } else {
                 console.log("after db is created", req.body)
                 console.log(results)
-                return res.status(200).json({status: 'ok',results:results});
+                return res.status(200).json({data: results});
                 // return res.json()
           }
         }
@@ -142,21 +142,10 @@ function createRouter(db) {
                             res.status(500).json({status: 'error'});
                         }
                         else {
-                            res.status(200).json({status: 'ok'});
-                            id=results2.insertId
-                            db.query(
-                                `INSERT INTO bugtrackerdb.developers (Projects_id,Users_id,roleType,isCreator) VALUES (${id},${req.body.creatorId},'${req.body.roleType}',0)`,
-                                (error) => {
-                                    if (error) {
-                                    console.error(error);
-                                    res.status(500).json({status: 'error'});
-                                    } else {
-                                    res.status(200).json({status: 'ok'});
-                                    }
-                                }
-                            )
+                            return res.status(200).json({status: 'ok'});
+                            // id=results2.insertId
                             // db.query(
-                            //     `INSERT INTO bugtrackerdb.developers (Projects_id,Users_id,roleType,isCreator) VALUES (${id},${req.body.user2Id},'${req.body.user2roleType}',0)`,
+                            //     `INSERT INTO bugtrackerdb.developers (Projects_id,Users_id,roleType,isCreator) VALUES (${id},${req.body.userId},'${req.body.roleType}',1)`,
                             //     (error) => {
                             //         if (error) {
                             //         console.error(error);
@@ -298,9 +287,10 @@ function createRouter(db) {
             )
         });
         router.post('/tickets', function (req, res, next) {
+            console.log(req.body);
             db.query(
                 `INSERT INTO bugtrackerdb.tickets (ticketName,ticketType,ticketDescription,ticketPriority,ticketDueDate,ticketStatus,Projects_id,Projects_creatorId,ticketCreatorId,assignedUserId) VALUES ('${req.body.ticketName}','${req.body.ticketType}',
-                '${req.body.ticketDescription}','${req.body.ticketPriority}','${req.body.ticketDueDate}','${req.body.ticketStatus}',${req.body.projectId},${req.body.projectCreatorId},${req.body.ticketCreatorId},${req.body.assignedUserId})`,
+                '${req.body.ticketDescription}','${req.body.ticketPriority}','${req.body.ticketDueDate}','${req.body.ticketStatus}','${req.body.Projects_id}','${req.body.Projects_creatorId}','${req.body.ticketCreatorId}','${req.body.assignedUserId}')`,
                 (error) => {
                     if (error) {
                     console.error(error);
@@ -333,6 +323,7 @@ function createRouter(db) {
                         console.log(error);
                         res.status(500).json({status: 'error'});
                     } else {
+                        console.log(results);
                         return res.status(200).json(results);
                     }
                 }
@@ -341,12 +332,13 @@ function createRouter(db) {
         router.get('/tickets/:id', function(req,res,next){
             db.query(
                 `SELECT users.id AS UserId,assignedUserId,ticketCreatorId,CONCAT(firstName,' ',lastName) AS fullName, ticketName,ticketType,ticketDescription,ticketPriority,ticketDueDate,ticketStatus,tickets.createdAt,tickets.updatedAt,projects.projectName
-                from bugtrackerdb.users inner join bugtrackerdb.tickets on users.id=assignedUserId or users.id=tickets.ticketCreatorid inner join bugtrackerdb.projects on tickets.Projects_id=projects.id where tickets.id=${req.params.id};`,
+                from bugtrackerdb.users inner join bugtrackerdb.tickets on tickets.assignedUserId=users.id or tickets.ticketCreatorid = users.id inner join bugtrackerdb.projects on tickets.Projects_id=projects.id where tickets.id=${req.params.id};`,
                 (error, results) => {
                     if (error) {
                         console.log(error);
                         res.status(500).json({status: 'error'});
                     } else {
+                        console.log(results);
                         return res.status(200).json(results);
                     }
                 }
@@ -367,9 +359,10 @@ function createRouter(db) {
             )
         });
         router.post('/comments', function (req, res, next) {
+            console.log(req.body)
             db.query(
-                `INSERT INTO bugtrackerdb.comments (comment,Tickets_id,commentCreatorId) VALUES ('${req.body.comment}',${req.body.ticketId},
-                ${req.body.comment}',${req.body.ticketId},${req.body.commentCreatorId})`,
+                `INSERT INTO bugtrackerdb.comments (comment,Tickets_id,commentCreatorId) VALUES (
+                '${req.body.comment}','${req.body.Tickets_id}','${req.body.commentCreatorId}')`,
                 (error) => {
                     if (error) {
                     console.error(error);
@@ -383,12 +376,13 @@ function createRouter(db) {
         router.get('/comments/:ticketId', function (req, res, next) {
             db.query(
                 `SELECT * From bugtrackerdb.comments where Tickets_id=${req.params.ticketId}`,
-                (error) => {
+                (error, results) => {
                     if (error) {
-                    console.error(error);
-                    res.status(500).json({status: 'error'});
+                        console.error(error);
+                        res.status(500).json({status: 'error'});
                     } else {
-                    res.status(200).json({status: 'ok'});
+                    console.log(results);
+                    res.status(200).json({status: 'ok', data: results});
                     }
                 }
             )

@@ -10,6 +10,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@angular/core": "^7.0.0",
+    "@fullcalendar/angular": "^4.3.1",
+    "@fullcalendar/core": "^4.3.1",
+    "@fullcalendar/daygrid": "^4.3.0",
     "bcrypt": "^3.0.7",
     "cors": "2.8.5",
     "express": "^4.17.1",

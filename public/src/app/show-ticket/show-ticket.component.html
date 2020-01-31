@@ -1,0 +1,83 @@
+<h1 class="display-4" style="margin-left: 20vw;">{{oneTicket.ticketName}}</h1>
+<hr>
+<div class="show-card mx-auto" style="width:fit-content">
+    <div style="background-color: rgba(240, 238, 238, 0.6);" class="show-act my-upcoming-tasks border d-inline-block m-3 p-4 align-top">
+        <table style="background-color: rgba(240, 238, 238, 0.6);" class="table table-striped table">
+            
+              <tr>
+                <th>Project Name</th>
+                  <td>{{oneTicket.projectName}}</td>
+              </tr>
+              <tr>
+                <th>Ticket Name</th>
+                  <td>{{oneTicket.ticketName}}</td>
+              </tr>
+              <tr>
+                <th>Ticket Type</th>
+                  <td>{{oneTicket.ticketType}}</td>
+              </tr>
+              <tr>
+                <th>Priority</th>
+                  <td>{{oneTicket.ticketPriority}}</td>
+              </tr>
+              <tr>
+                <th>Due Date</th>
+                  <td>{{oneTicket.ticketDueDate}}</td>
+              </tr>
+              <tr>
+                <th>Priority</th>
+                  <td>{{oneTicket.ticketPriority}}</td>
+              </tr>
+              <tr>
+                <th>Status</th>
+                  <td>{{oneTicket.ticketStatus}}</td>
+              </tr>
+              <tr>
+                <th>Date added</th>
+                  <td>{{oneTicket.createdAt}}</td>
+              </tr>
+        </table>
+          <table style="background-color: rgba(240, 238, 238, 0.6);" class="table table-striped table">
+            <thead>
+              <tr>
+                <th scope="col">Ticket Number</th>
+                <th scope="col">Senior Developer</th>
+                <th scope="col">Assigned Developer</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">{{TicketId}}</th>
+                <td>{{oneTicket.fullName}}</td>
+                <td>{{secondTicket.fullName}}</td>
+              </tr>
+            </tbody>
+          </table>
+
+    </div>
+    <div style="background-color: rgba(240, 238, 238, 0.6);" class="d-inline-block m-3 p-4">
+      <table class="table table-striped table">
+        <thead>
+          <tr>
+            <th scope="col">Comments</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let comment of allComments">
+          <tr>
+            <td>{{secondTicket.fullName}}</td>
+            <td>{{comment.createdAt | date:"MM/dd/yyyy 'at' h:mma"}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Commented: {{comment.comment}}</th>
+          </tr>
+        </tbody>
+    </table>
+    <form style="background-color: rgba(240, 238, 238, 0.6);">
+        <input class="form-control" name="newComment.comment" [(ngModel)]="newComment.comment" type="text">
+        <input type="hidden" value={{TicketId}}  name="newComment.Tickets_id" [(ngModel)]="newComment.Tickets_id" >
+        <button class="btn btn-warning btn-block mt-3" (click)="createComment(newComment)" >Leave a comment</button>
+    </form>
+    </div>
+   
+    <br>
+</div>
