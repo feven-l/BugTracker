@@ -31,6 +31,12 @@ export class HttpService {
   getTicket(Ticketid){
     return this._http.get(`/tickets/${Ticketid}`);
   }
+  createComment(newComment){
+    return this._http.post('/comments', newComment);
+  }
+  getComments(Ticketid){
+    return this._http.get(`/comments/${Ticketid}`);
+  }
   constructor(private _http: HttpClient) { 
   }
 }

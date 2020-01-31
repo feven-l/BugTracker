@@ -23,7 +23,7 @@
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
               <a class="dropdown-item" [routerLink]="['/tracker/ticket/new']">Create Ticket</a>
               <a class="dropdown-item" [routerLink]="['/tracker/project/new']">Create Project</a>
-              <a class="dropdown-item" href="#">Manage users</a>
+              <a class="dropdown-item" [routerLink]="['/tracker/users']">Manage users</a>
             </div>
           </div>
         </ul>
@@ -94,7 +94,7 @@
             <!-- Separator without title -->
             <!-- <li class="list-group-item border-bottom sidebar-separator menu-collapsed"></li> -->
             <!-- /END Separator -->
-            <a href="#" class="list-opacity list-group-item border-bottom list-group-item border-bottom-action">
+            <a [routerLink]="['/tracker/users']" class="list-opacity list-group-item border-bottom list-group-item border-bottom-action">
               <div class="d-flex w-100 justify-content-start align-items-center">
                 <span class="fa fa-address-book fa-fw mr-3"></span>
                 <span class="menu-collapsed text-black">Manage Users</span>

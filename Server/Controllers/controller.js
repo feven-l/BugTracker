@@ -142,8 +142,8 @@ function createRouter(db) {
                             res.status(500).json({status: 'error'});
                         }
                         else {
-                            res.status(200).json({status: 'ok'});
-                            id=results2.insertId
+                            return res.status(200).json({status: 'ok'});
+                            // id=results2.insertId
                             // db.query(
                             //     `INSERT INTO bugtrackerdb.developers (Projects_id,Users_id,roleType,isCreator) VALUES (${id},${req.body.userId},'${req.body.roleType}',1)`,
                             //     (error) => {
@@ -359,9 +359,10 @@ function createRouter(db) {
             )
         });
         router.post('/comments', function (req, res, next) {
+            console.log(req.body)
             db.query(
-                `INSERT INTO bugtrackerdb.comments (comment,Tickets_id,commentCreatorId) VALUES ('${req.body.comment}',${req.body.ticketId},
-                ${req.body.comment}',${req.body.ticketId},${req.body.commentCreatorId})`,
+                `INSERT INTO bugtrackerdb.comments (comment,Tickets_id,commentCreatorId) VALUES (
+                '${req.body.comment}','${req.body.Tickets_id}','${req.body.commentCreatorId}')`,
                 (error) => {
                     if (error) {
                     console.error(error);
@@ -375,12 +376,13 @@ function createRouter(db) {
         router.get('/comments/:ticketId', function (req, res, next) {
             db.query(
                 `SELECT * From bugtrackerdb.comments where Tickets_id=${req.params.ticketId}`,
-                (error) => {
+                (error, results) => {
                     if (error) {
-                    console.error(error);
-                    res.status(500).json({status: 'error'});
+                        console.error(error);
+                        res.status(500).json({status: 'error'});
                     } else {
-                    res.status(200).json({status: 'ok'});
+                    console.log(results);
+                    res.status(200).json({status: 'ok', data: results});
                     }
                 }
             )

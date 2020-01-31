@@ -29,7 +29,8 @@ export class AddProjectComponent implements OnInit {
       console.log(newProject);
       let obs = this._httpService.createProject(newProject);
       obs.subscribe((data:any) => {
-        if(status == "ok"){
+        console.log(data);
+        if(data.status == "ok"){
           console.log("created new project!");
           this._router.navigate(['']);
         }

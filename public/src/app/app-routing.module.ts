@@ -8,6 +8,7 @@ import { GenericPageComponent } from './generic-page/generic-page.component';
 import { RegisterComponent } from './register/register.component'
 import { LoginComponent } from './login/login.component';
 import { ShowTicketComponent } from './show-ticket/show-ticket.component';
+import { UserListComponent } from './user-list/user-list.component';
 
 
 const routes: Routes = [
@@ -19,7 +20,8 @@ const routes: Routes = [
   { path: 'tracker/welcome', component: GenericPageComponent},
   { path: 'tracker/signup', component: RegisterComponent},
   { path: 'tracker/signin', component: LoginComponent},
-  { path: 'tracker/ticket/:id', component: ShowTicketComponent}
+  { path: 'tracker/ticket/:id', component: ShowTicketComponent},
+  { path: 'tracker/users', component: UserListComponent}
 
 ];
 

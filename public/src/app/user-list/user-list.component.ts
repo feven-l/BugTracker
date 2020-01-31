@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { HttpService } from '../http.service';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-list',
@@ -6,10 +8,26 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-list.component.css']
 })
 export class UserListComponent implements OnInit {
-
-  constructor() { }
+  allUsers: any;
+  constructor(private _httpService: HttpService,
+    private _route: ActivatedRoute,
+    private _router: Router) { }
 
   ngOnInit() {
+    this.getUsers();
+  }
+  getUsers(){
+    let obs = this._httpService.getUsers();
+    obs.subscribe((data:any) => {
+      console.log(data);
+      if(data){
+        console.log("got all users!");
+        this.allUsers = data;
+      }
+      else{
+        console.log("error");
+      }
+    })
   }
 
 }
