@@ -12,7 +12,7 @@ import { LoginComponent } from './login/login.component';
 export class AppComponent implements OnInit{
   title = 'public';
   loggedout : boolean;
-  @Input() inSession: any;
+
 
   constructor(
     private _session : LoginComponent,
@@ -22,7 +22,6 @@ export class AppComponent implements OnInit{
   ) { }
   ngOnInit(){
     this.loggedout = true;
-    console.log(this.inSession);
   }
   // getSession(session){
   //   this.inSession = 

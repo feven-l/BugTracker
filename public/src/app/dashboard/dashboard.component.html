@@ -1,13 +1,16 @@
 <h1 class="display-4" style="margin-left: 20vw;">Dashboard</h1>
 <hr>
 <div class="show-card mx-auto" style="width:fit-content">
-    <div class="show-act my-upcoming-tasks border d-inline-block m-3 p-4">
+    <div class="show-act my-upcoming-tasks border d-inline-block m-3 p-4 align-top">
     <h4>My Tasks</h4>
     <hr>
     </div>
     <div class="show-act all-activity border d-inline-block m-3 p-4">
     <h4>Upcoming</h4>
     <hr>
+    <ul *ngFor="let ticket of allTickets">
+        <a [routerLink]="['/tracker/ticket', ticket.id]">{{ticket.ticketName}}</a>
+    </ul>
     </div>
     <br>
 </div>

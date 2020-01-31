@@ -4,30 +4,31 @@
         <hr>
         <div class="main-sect col mr-5 mx-auto">
             <div class="form-group">
-                <label for="exampleInputEmail1">Name</label>
-                <input type="text" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <label for="projectName">Project Name</label>
+                <input type="text" class="form-control form-control-sm" name="newProject.projectName" [(ngModel)]="newProject.projectName">
             </div>
             <div class="form-group pb-3">
-                <label for="">Description</label>
-                <input type="text" class="form-control form-control-sm" id="">
+                <label for="projectDescription">Project Description</label>
+                <input name="newProject.projectDescription" [(ngModel)]="newProject.projectDescription" type="text" class="form-control form-control-sm" >
             </div>
             <hr>
             <div class="form-group">
-                <label for="">Due Date</label>
-                <input type="date" class="form-control form-control-sm" id="">
+                <label for="projectDueDate">Due Date</label>
+                <input type="date" name="newProject.projectDueDate" [(ngModel)]="newProject.projectDueDate" class="form-control form-control-sm" >
             </div>
             <div class="form-group">
                 <label for="ProjectName">Priority</label>
-                <select class="custom-select custom-select-sm" name="" id="">
+                <select class="custom-select custom-select-sm" name="newProject.projectPriority" [(ngModel)]="newProject.projectPriority" >
                     <option selected>Select Priority</option>
-                    <option value="projects">High</option>
-                    <option value="projects">Medium</option>
-                    <option value="projects">Low</option>
+                    <option value="High">High</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Low">Low</option>
                 </select>
             </div>
+            <input type="hidden" name="newProject.creatorId" ([ngModel])="newProject.creatorId">
         </div>
         <div class="row">
-            <button type="submit" class="m-3 col-sm-5 btn btn-dark mx-auto">Submit</button>
+            <button class="m-3 col-sm-5 btn btn-dark mx-auto" (click)="createProject(newProject)">Add Project</button>
             <button type="submit" class="m-3 col-sm-5 btn btn-dark mx-auto">Cancel</button>
         </div>
     </form>

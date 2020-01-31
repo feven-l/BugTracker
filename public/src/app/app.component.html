@@ -7,8 +7,8 @@
   <title>Document</title>
 </head>
 <body>
-  <app-generic-page *ngIf="inSession == 0"></app-generic-page>
-  <div class="container-fluid" *ngIf="!inSession==0">
+  <app-generic-page *ngIf="!loggedout"></app-generic-page>
+  <div class="container-fluid" *ngIf="loggedout">
     <nav class="navbar navbar-bg fixed-top navbar-expand-lg navbar-light bg-light shadow p-3 mb-5 rounded">
       <div class="collapse navbar-collapse">
         <a class="navbar-brand" href="#">Bug Tracker</a>
