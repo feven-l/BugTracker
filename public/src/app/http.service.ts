@@ -10,7 +10,7 @@ export class HttpService {
     return this._http.post('/users', newUser);
   }
   loginUser(checkUser){
-    return this._http.post('/userLogin', checkUser);
+    return this._http.get(`/userLogin/${checkUser.email}`);
   }
   constructor(private _http: HttpClient) { 
   }

@@ -71,13 +71,13 @@ function createRouter(db) {
         router.get('/userLogin/:email', function (req, res, next) {
             console.log(req.body);
             db.query(
-                `SELECT * FROM bugtrackerdb.users WHERE email = '${req.params.email}'`,
+                `SELECT * FROM bugtrackerdb.users WHERE email = '${req.params.email}' limit 1`,
                 (error, results) => {
                     if (error) {
                         console.log(error);
                         res.status(500).json({status: 'error'});
                     } else {
-                        console.log(results[0].password);
+                        console.log(results[0]);
                         // if(results[0].password == req.body.password){
                             return res.status(200).json(results[0]);
                         // }else{

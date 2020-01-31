@@ -29,24 +29,25 @@ export class LoginComponent implements OnInit {
       this.aTaskEventEmitter.emit(false); //we can pass in any data type
     }
   userLogin(checkUser){
-    this.triggerEvent();
-    this._router.navigate(['/dashboard']);
+    // this.triggerEvent();
+    // this._router.navigate(['/dashboard']);
 
-    // let obs = this._httpService.loginUser(checkUser);
-    // obs.subscribe((data:any) => {
-    //   console.log(data)
-    //   if(data.email){
-    //     console.log("logged in user!");
-    //     // this.inSession = data.id;
-    //     // this._updateSession.getSession(this.inSession);
-    //     // console.log(this.inSession);
-    //     // this._router.navigate(['']);
-    //     this._router.navigate(['/dashboard']);
-    //         }
-    //   else{
-    //     console.log("error");
-    //   }
-    // })
+    let obs = this._httpService.loginUser(checkUser);
+    obs.subscribe((data:any) => {
+      console.log(data)
+      if(data && data.password==checkUser.password){
+        console.log("logged in user!");
+        // this.inSession = data.id;
+        // this._updateSession.getSession(this.inSession);
+        // console.log(this.inSession);
+        // this._router.navigate(['']);
+        this.triggerEvent();
+        this._router.navigate(['/dashboard']);
+            }
+      else{
+        console.log("error");
+      }
+    })
   }
 
 }
