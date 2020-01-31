@@ -33,7 +33,7 @@
       </nav>
     </div>
   </header>
-  <app-login *ngIf="clicked == 2"></app-login>
+  <app-login (aTaskEventEmitter)="dataFromChild($event)" *ngIf="clicked == 2"></app-login>
   <app-register (aTaskEventEmitter)="dataFromChild($event)"  *ngIf='clicked == 1'></app-register>
 
   <div class="welcome-page" *ngIf="!clicked">

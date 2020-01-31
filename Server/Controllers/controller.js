@@ -68,21 +68,21 @@ function createRouter(db) {
             }
             );
         });
-        router.post('/userLogin', function (req, res, next) {
+        router.get('/userLogin/:email', function (req, res, next) {
             console.log(req.body);
             db.query(
-                `SELECT email, password, id FROM bugtrackerdb.users WHERE email = '${req.body.email}'`,
+                `SELECT * FROM bugtrackerdb.users WHERE email = '${req.params.email}' limit 1`,
                 (error, results) => {
                     if (error) {
                         console.log(error);
                         res.status(500).json({status: 'error'});
                     } else {
-                        console.log(results[0].password);
-                        if(results[0].password == req.body.password){
+                        console.log(results[0]);
+                        // if(results[0].password == req.body.password){
                             return res.status(200).json(results[0]);
-                        }else{
-                            return res.status(200).json("error");
-                        }
+                        // }else{
+                        //     return res.status(200).json("error");
+                        // }
                     }
                 }
                 );

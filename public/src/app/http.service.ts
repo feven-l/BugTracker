@@ -14,7 +14,7 @@ export class HttpService {
     return this._http.post('/tickets', newTicket);
   }
   loginUser(checkUser){
-    return this._http.post('/userLogin', checkUser);
+    return this._http.get(`/userLogin/${checkUser.email}`);
   }
   createProject(newProject){
     return this._http.post('/projects', newProject);
