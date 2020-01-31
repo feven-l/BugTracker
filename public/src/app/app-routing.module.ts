@@ -11,7 +11,7 @@ import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   { path: '', component: GenericPageComponent},
-  { path: 'dashboard/:id', component: DashboardComponent},
+  { path: 'dashboard', component: DashboardComponent},
   { path: 'tracker/ticket/new', component: AddTicketComponent},
   { path: 'tracker/project/new', component: AddProjectComponent},
   { path: 'tracker/ticket/:id/edit', component: UpdateTicketComponent},

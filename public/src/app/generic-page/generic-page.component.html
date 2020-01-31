@@ -34,7 +34,7 @@
     </div>
   </header>
   <app-login *ngIf="clicked == 2"></app-login>
-  <app-register *ngIf='clicked == 1'></app-register>
+  <app-register (aTaskEventEmitter)="dataFromChild($event)"  *ngIf='clicked == 1'></app-register>
 
   <div class="welcome-page" *ngIf="!clicked">
     <main role="main" class="inner cover main-m">

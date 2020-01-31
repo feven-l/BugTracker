@@ -40,12 +40,13 @@ function createRouter(db) {
     db.query(
         `INSERT INTO bugtrackerdb.users (firstName, lastName, email, password) VALUES ('${req.body.firstName}','${req.body.lastName}','${req.body.email}', '${req.body.password}')`,
         //   [req.body.owner, req.body.name, req.body.description],
-        (error) => {
+        (error,results) => {
             if (error) {
                 console.error(error);
                 res.status(500).json({status: 'error'});
             } else {
                 console.log("after db is created", req.body)
+                console.log(results)
                 res.status(200).json({status: 'ok'});
                 // return res.json()
           }
@@ -86,7 +87,7 @@ function createRouter(db) {
                 }
                 );
             });
-        router.get('/users/', function (req, res, next) {
+        router.get('/users', function (req, res, next) {
             db.query(
                 `SELECT * FROM bugtrackerdb.users`,
                 (error, results) => {
@@ -144,7 +145,7 @@ function createRouter(db) {
                             res.status(200).json({status: 'ok'});
                             id=results2.insertId
                             db.query(
-                                `INSERT INTO bugtrackerdb.developers (Projects_id,Users_id,roleType,isCreator) VALUES (${id},${req.body.userId},'${req.body.roleType}',1)`,
+                                `INSERT INTO bugtrackerdb.developers (Projects_id,Users_id,roleType,isCreator) VALUES (${id},${req.body.creatorId},'${req.body.roleType}',0)`,
                                 (error) => {
                                     if (error) {
                                     console.error(error);
@@ -154,6 +155,17 @@ function createRouter(db) {
                                     }
                                 }
                             )
+                            // db.query(
+                            //     `INSERT INTO bugtrackerdb.developers (Projects_id,Users_id,roleType,isCreator) VALUES (${id},${req.body.user2Id},'${req.body.user2roleType}',0)`,
+                            //     (error) => {
+                            //         if (error) {
+                            //         console.error(error);
+                            //         res.status(500).json({status: 'error'});
+                            //         } else {
+                            //         res.status(200).json({status: 'ok'});
+                            //         }
+                            //     }
+                            // )
                         }
                     }
                 );
@@ -329,7 +341,7 @@ function createRouter(db) {
         router.get('/tickets/:id', function(req,res,next){
             db.query(
                 `SELECT users.id AS UserId,assignedUserId,ticketCreatorId,CONCAT(firstName,' ',lastName) AS fullName, ticketName,ticketType,ticketDescription,ticketPriority,ticketDueDate,ticketStatus,tickets.createdAt,tickets.updatedAt,projects.projectName
-                from bugtrackerdb.users inner join bugtrackerdb.tickets on tickets.assignedUserId=users.id or tickets.ticketCreatorid inner join bugtrackerdb.projects on tickets.Projects_id=projects.id where tickets.id=${req.params.id};`,
+                from bugtrackerdb.users inner join bugtrackerdb.tickets on users.id=assignedUserId or users.id=tickets.ticketCreatorid inner join bugtrackerdb.projects on tickets.Projects_id=projects.id where tickets.id=${req.params.id};`,
                 (error, results) => {
                     if (error) {
                         console.log(error);

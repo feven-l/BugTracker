@@ -6,8 +6,8 @@
 
         <label for="checkUser.password">Password</label>
         <input class="form-control"  name="checkUser.password" [(ngModel)]="checkUser.password">
-        
-        <input class="btn btn-success btn-block mt-3" type="submit" *ngIf="!inSession == 0" [inSession]='inSession' (click)="userLogin(checkUser)" value="Log in">
+        <button (click)="userLogin(checkUser)" ></button>
+        <!-- <input class="btn btn-success btn-block mt-3" type="submit"  (click)="userLogin(checkUser)" [inSession]='inSession' value="Log in"> -->
 
     </form>    
 </div>
