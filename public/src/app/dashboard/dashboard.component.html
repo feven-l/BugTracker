@@ -8,8 +8,8 @@
     <div class="show-act all-activity border d-inline-block m-3 p-4">
     <h4>Upcoming</h4>
     <hr>
-    <ul *ngFor="let ticket of allTickets">
-        <a [routerLink]="['/tracker/ticket', ticket.id]">{{ticket.ticketName}}</a>
+    <ul class="list-group list-group-flush" *ngFor="let ticket of allTickets">
+        <a class="list-group-item list-group-item-action list-group-item-warning" [routerLink]="['/tracker/ticket', ticket.id]">Ticket: {{ticket.ticketName}}  |   Priority: {{ticket.ticketPriority}}</a>
     </ul>
     </div>
     <br>

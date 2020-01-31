@@ -49,7 +49,7 @@
             Menu
           </a>
           <div class="dropdown-menu" aria-labelledby="smallerscreenmenu">
-            <a class="dropdown-item" href="#">Dashboard</a>
+            <a class="dropdown-item" [routerLink]="['']">Dashboard</a>
             <a class="dropdown-item" href="#">Profile</a>
             <a class="dropdown-item" href="#">Tasks</a>
             <a class="dropdown-item" href="#">Etc ...</a>
@@ -73,7 +73,7 @@
             </li>
             <!-- /END Separator -->
             <!-- Menu with submenu -->
-            <a href="#" class=" list-opacity list-group-item border-bottom list-group-item border-bottom-action">
+            <a [routerLink]="['']" class=" list-opacity list-group-item border-bottom list-group-item border-bottom-action">
               <div class="d-flex w-100 justify-content-start align-items-center">
                 <span class="fa fa-address-card fa-fw mr-3"></span>
                 <span class="menu-collapsed text-black">Dashboard</span>

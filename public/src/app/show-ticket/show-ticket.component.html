@@ -3,29 +3,40 @@
 <div class="show-card mx-auto" style="width:fit-content">
     <div class="show-act my-upcoming-tasks border d-inline-block m-3 p-4 align-top">
         <table class="table table-striped table-dark">
-            <thead>
+            
               <tr>
-                <th scope="col">Project Name</th>
-                <th scope="col">Ticket Name</th>
-                <th scope="col">Type</th>
-                <th scope="col">Priority</th>
-                <th scope="col">Due Date</th>
-                <th scope="col">Status</th>
-                <th scope="col">Date Created</th>
+                <th>Project Name</th>
+                  <td>{{oneTicket.projectName}}</td>
               </tr>
-            </thead>
-            <tbody>
               <tr>
-                <th scope="row">{{oneTicket.projectName}}</th>
-                <td>{{oneTicket.ticketName}}</td>
-                <td>{{oneTicket.ticketType}}</td>
-                <td>{{oneTicket.ticketPriority}}</td>
-                <td>{{oneTicket.ticketDueDate}}</td>
-                <td>{{oneTicket.ticketStatus}}</td>
-                <td>{{oneTicket.createdAt}}</td>
+                <th>Ticket Name</th>
+                  <td>{{oneTicket.ticketName}}</td>
               </tr>
-            </tbody>
-          </table>
+              <tr>
+                <th>Ticket Type</th>
+                  <td>{{oneTicket.ticketType}}</td>
+              </tr>
+              <tr>
+                <th>Priority</th>
+                  <td>{{oneTicket.ticketPriority}}</td>
+              </tr>
+              <tr>
+                <th>Due Date</th>
+                  <td>{{oneTicket.ticketDueDate}}</td>
+              </tr>
+              <tr>
+                <th>Priority</th>
+                  <td>{{oneTicket.ticketPriority}}</td>
+              </tr>
+              <tr>
+                <th>Status</th>
+                  <td>{{oneTicket.ticketStatus}}</td>
+              </tr>
+              <tr>
+                <th>Date added</th>
+                  <td>{{oneTicket.createdAt}}</td>
+              </tr>
+        </table>
           <table class="table table-striped table-dark">
             <thead>
               <tr>

@@ -15,6 +15,8 @@ import { GenericPageComponent } from './generic-page/generic-page.component';
 import { HttpService } from './http.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ShowTicketComponent } from './show-ticket/show-ticket.component';
+import { UserListComponent } from './user-list/user-list.component';
+import { CommentsComponent } from './comments/comments.component';
 
 
 @NgModule({
@@ -27,7 +29,9 @@ import { ShowTicketComponent } from './show-ticket/show-ticket.component';
     RegisterComponent,
     LoginComponent,
     GenericPageComponent,
-    ShowTicketComponent
+    ShowTicketComponent,
+    UserListComponent,
+    CommentsComponent
   ],
   imports: [
     BrowserModule,
