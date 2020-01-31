@@ -7,7 +7,7 @@
   <title>Document</title>
 </head>
 <body>
-  <app-generic-page (aTaskEventEmitter)="dataFromChild($event)" *ngIf="loggedout"></app-generic-page>
+  <app-generic-page (UserIdEmitter)="dataFromChild($event)" (aTaskEventEmitter)="dataFromChild($event)" *ngIf="loggedout"></app-generic-page>
   <div class="container-fluid" *ngIf="!loggedout">
     <nav class="navbar navbar-bg fixed-top navbar-expand-lg navbar-light bg-light shadow p-3 mb-5 rounded">
       <div class="collapse navbar-collapse">

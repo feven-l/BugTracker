@@ -11,7 +11,8 @@ import { LoginComponent } from './login/login.component';
 })
 export class AppComponent implements OnInit{
   title = 'public';
-  loggedout : boolean;
+  loggedout : any;
+  userId:any;
   // inSession: any;
 
   constructor(
@@ -21,8 +22,10 @@ export class AppComponent implements OnInit{
     private _router: Router
   ) { }
   dataFromChild(blah){
-    console.log(blah);
-    this.loggedout=blah;
+    console.log(blah.id,blah.loggedOut);
+    // console.log(userId+" userId");
+    this.userId=blah.id;
+    this.loggedout=blah.loggedOut;
   }
   ngOnInit(){
     this.loggedout = true;
