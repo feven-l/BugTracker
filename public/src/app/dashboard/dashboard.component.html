@@ -4,16 +4,57 @@
     <div class="show-act my-upcoming-tasks border d-inline-block m-3 p-4 align-top">
     <h4>My Tasks <img style="width:50px;" class="ml-4 mb-2" src="https://www.freepnglogos.com/uploads/pin-png/pin-pins-png-clipart-best-4.png" alt=""></h4>
     <hr>
-    <ul class="list-group list-group-flush" *ngFor="let ticket of allTickets">
-        <a class="list-group-item list-group-item-action list-group-item-warning" [routerLink]="['/tracker/ticket', ticket.id]">Ticket: {{ticket.ticketName}}  |   Priority: {{ticket.ticketPriority}}</a>
+    <ul class="list-group list-group-flush">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                <input type="checkbox" aria-label="Checkbox for following text input" placeholder="Send out email by end of day.">
+                </div>
+            </div>
+            <input type="text" class="form-control" aria-label="Text input with checkbox">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <input type="checkbox" aria-label="Checkbox for following text input">
+                </div>
+            </div>
+            <input type="text" class="form-control" aria-label="Text input with checkbox">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <input type="checkbox" aria-label="Checkbox for following text input">
+                </div>
+            </div>
+            <input type="text" class="form-control" aria-label="Text input with checkbox">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <input type="checkbox" aria-label="Checkbox for following text input">
+                </div>
+            </div>
+            <input type="text" class="form-control" aria-label="Text input with checkbox">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <input type="checkbox" aria-label="Checkbox for following text input">
+                </div>
+            </div>
+            <input type="text" class="form-control" aria-label="Text input with checkbox">
+        </div>
     </ul>
     </div>
     <div class="show-act all-activity border d-inline-block m-3 p-4">
-    <h4>Upcoming <img style="width:50px;" class="ml-4 mb-2" src="https://www.freepnglogos.com/uploads/pin-png/pin-pins-png-clipart-best-4.png" alt=""></h4>
-    <hr>
-    <ul class="list-group list-group-flush" *ngFor="let ticket of allTickets">
-        <a class="list-group-item list-group-item-action list-group-item-warning" [routerLink]="['/tracker/ticket', ticket.id]">Ticket: {{ticket.ticketName}}  |   Priority: {{ticket.ticketPriority}}</a>
-    </ul>
+        <h4>Upcoming <img style="width:50px;" class="ml-4 mb-2" src="https://www.freepnglogos.com/uploads/pin-png/pin-pins-png-clipart-best-4.png" alt=""></h4>
+        <hr>
+    <div class="upcoming overflow-auto">
+        <ul class="list-group list-group-flush" *ngFor="let ticket of allTickets">
+            <a class="list-group-item list-group-item-action list-group-item-warning m-2" [routerLink]="['/tracker/ticket', ticket.id]">Ticket: {{ticket.ticketName}}  |   Priority: {{ticket.ticketPriority}}</a>
+        </ul>
+    </div>
     </div>
     <br>
 </div>
