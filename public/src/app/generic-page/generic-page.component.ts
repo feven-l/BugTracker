@@ -10,15 +10,19 @@ export class GenericPageComponent implements OnInit {
   clicked: Number;
   clickLogin: boolean;
   loggedout:any;
+  userId:any;
   @Output() aTaskEventEmitter = new EventEmitter();
+  @Output() UserIdEmitter = new EventEmitter();
 
   constructor(
     private _route: ActivatedRoute,
     private _router: Router
   ) { }
-  dataFromChild(blah){
-    console.log(blah);
-    this.loggedout=blah;
+  dataFromChild(ublah){
+    console.log(ublah.loggedOut+" loginfo");
+    console.log(ublah.id+" userid");
+    this.loggedout=ublah.loggedOut;
+    this.userId=ublah.id
     this.triggerEvent()
   }
   ngOnInit() {
@@ -26,8 +30,8 @@ export class GenericPageComponent implements OnInit {
     this.clickLogin = false;
   }
   triggerEvent(){
-    //  2b. Emit the Event
-  this.aTaskEventEmitter.emit(false);
+    this.aTaskEventEmitter.emit({id:this.userId, loggedOut:this.loggedout});
+    // this.aTaskEventEmitter.emit(false);
 }
   goToSignUp(){
     this.clicked = 1;

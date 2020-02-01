@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
   checkUser : any;
   // inSession: number;
   @Output() aTaskEventEmitter = new EventEmitter();
+  // @Output() UserIdEmitter = new EventEmitter();
   
   constructor(
     // private _updateSession: AppComponent,
@@ -24,9 +25,9 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.checkUser = {email: "", password: ""};
   }
-    triggerEvent(){
-      //  2b. Emit the Event
-      this.aTaskEventEmitter.emit(false); //we can pass in any data type
+    triggerEvent(UserId){
+      this.aTaskEventEmitter.emit({loggedOut: false, id: UserId}); //we can pass in any data type
+      // this.aTaskEventEmitter.emit(UserId);
     }
   userLogin(checkUser){
     // this.triggerEvent();
@@ -40,8 +41,9 @@ export class LoginComponent implements OnInit {
         // this.inSession = data.id;
         // this._updateSession.getSession(this.inSession);
         // console.log(this.inSession);
-        // this._router.navigate(['']);
-        this.triggerEvent();
+        // this._router.navigate([''])
+        console.log(data.id);
+        this.triggerEvent(data.id);
         this._router.navigate(['/dashboard']);
             }
       else{
